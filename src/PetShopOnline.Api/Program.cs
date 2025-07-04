@@ -1,11 +1,25 @@
+using PetShopOnline.Application.UseCases.Clientes.Create;
+using PetShopOnline.Domain;
+using PetShopOnline.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<CreateClienteUseCase>();
+builder.Services.AddScoped<IClienteRepository, ClienteRepositoryEmMemoria>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Version = "v1",
+        Title = "PetShop API",
+        Description = "API do sistema de e-commerce PetShop"
+    });
+});
 
 var app = builder.Build();
 

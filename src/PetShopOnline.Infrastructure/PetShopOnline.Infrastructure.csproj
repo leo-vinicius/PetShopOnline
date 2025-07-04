@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Storage\**" />
+    <EmbeddedResource Remove="Storage\**" />
+    <None Remove="Storage\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PetShopOnlline.Domain\PetShopOnline.Domain.csproj" />
   </ItemGroup>
 

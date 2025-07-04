@@ -2,6 +2,7 @@
 using PetShopOnline.Application.UseCases.Clientes.Create;
 using PetShopOnline.Communication.Requests;
 using PetShopOnline.Communication.Responses;
+using PetShopOnline.Exceptions;
 
 namespace PetShopOnline.Api.Controllers
 {
@@ -9,21 +10,25 @@ namespace PetShopOnline.Api.Controllers
     [ApiController]
     public class ClienteController : ControllerBase
     {
+        private readonly CreateClienteUseCase _useCase;
+
+        public ClienteController(CreateClienteUseCase useCase)
+        {
+            _useCase = useCase;
+        }
+
         [HttpPost]
         public IActionResult Create([FromBody] RequestCreateClienteJson request)
         {
             try
             {
-                var useCase = new CreateClienteUseCase();
-                var response = useCase.Executar(request);
+                var response = _useCase.Executar(request);
 
                 return Created(string.Empty, response);
             }
-            catch (ArgumentException ex)
+            catch (ClienteJaCadastradoException ex)
             {
-                var errorResponse = new ResponseErrorJson(ex.Message);
-
-                return BadRequest(errorResponse);
+                return Conflict(new ResponseErrorJson(ex.Message));
             }
             catch
             {

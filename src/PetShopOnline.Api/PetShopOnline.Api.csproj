@@ -7,13 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PetShopOnline.Application\PetShopOnline.Application.csproj" />
     <ProjectReference Include="..\PetShopOnline.Communication\PetShopOnline.Communication.csproj" />
-    <ProjectReference Include="..\PetShopOnline.Exception\PetShopOnline.Exception.csproj" />
+    <ProjectReference Include="..\PetShopOnline.Exceptions\PetShopOnline.Exceptions.csproj" />
     <ProjectReference Include="..\PetShopOnline.Infrastructure\PetShopOnline.Infrastructure.csproj" />
   </ItemGroup>
 
