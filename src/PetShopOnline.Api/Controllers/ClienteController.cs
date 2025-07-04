@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PetShopOnline.Application.UseCases.Clientes;
 using PetShopOnline.Application.UseCases.Clientes.Create;
 using PetShopOnline.Communication.Requests;
 using PetShopOnline.Communication.Responses;
@@ -10,11 +11,13 @@ namespace PetShopOnline.Api.Controllers
     [ApiController]
     public class ClienteController : ControllerBase
     {
-        private readonly CreateClienteUseCase _useCase;
+        private readonly CreateClienteUseCase _createUseCase;
+        private readonly GetClientesUseCase _getClientesUseCase;
 
-        public ClienteController(CreateClienteUseCase useCase)
+        public ClienteController(CreateClienteUseCase createClientesUseCase, GetClientesUseCase getClientesUseCase)
         {
-            _useCase = useCase;
+            _createUseCase = createClientesUseCase;
+            _getClientesUseCase = getClientesUseCase;
         }
 
         [HttpPost]
@@ -22,7 +25,7 @@ namespace PetShopOnline.Api.Controllers
         {
             try
             {
-                var response = _useCase.Executar(request);
+                var response = _createUseCase.Executar(request);
 
                 return Created(string.Empty, response);
             }
@@ -36,6 +39,22 @@ namespace PetShopOnline.Api.Controllers
 
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
+        }
+
+        [HttpGet]
+        public IActionResult GetClientes()
+        {
+            try
+            {
+                var response = _getClientesUseCase.Executar();
+
+                return Ok(response);
+            }
+            catch (NenhumClienteCadastradoException ex)
+            {
+                return NotFound(new ResponseErrorJson(ex.Message));
+            }
+
         }
     }
 }

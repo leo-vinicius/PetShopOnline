@@ -15,5 +15,10 @@ namespace PetShopOnline.Infrastructure
         {
             _clientes.Add(cliente);
         }
+
+        public List<Cliente> GetClientes()
+        {
+            return _clientes;
+        }
     }
 }

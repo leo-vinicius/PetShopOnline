@@ -1,3 +1,4 @@
+using PetShopOnline.Application.UseCases.Clientes;
 using PetShopOnline.Application.UseCases.Clientes.Create;
 using PetShopOnline.Domain;
 using PetShopOnline.Infrastructure;
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddScoped<CreateClienteUseCase>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepositoryEmMemoria>();
+builder.Services.AddScoped<GetClientesUseCase>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>

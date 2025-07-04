@@ -4,5 +4,6 @@
     {
         bool ExistePorEmail(string email);
         void Adicionar(Cliente cliente);
+        List<Cliente> GetClientes();
     }
 }
