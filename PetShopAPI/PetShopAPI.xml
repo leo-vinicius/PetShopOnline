@@ -1,0 +1,289 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PetShopAPI</name>
+    </assembly>
+    <members>
+        <member name="T:PetShopAPI.Configuration.SwaggerConfiguration">
+            <summary>
+            Configuração personalizada do Swagger para .NET 9
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Configuration.SwaggerConfiguration.AddSwaggerConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configura o Swagger para a API PetShop
+            </summary>
+            <param name="services">Collection de serviços</param>
+            <returns>Collection configurada</returns>
+        </member>
+        <member name="M:PetShopAPI.Configuration.SwaggerConfiguration.UseSwaggerConfiguration(Microsoft.AspNetCore.Builder.WebApplication,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Configura o middleware do Swagger
+            </summary>
+            <param name="app">Application builder</param>
+            <param name="environment">Ambiente de execução</param>
+            <returns>Application configurada</returns>
+        </member>
+        <member name="T:PetShopAPI.Configuration.ExampleSchemaFilter">
+            <summary>
+            Filtro para adicionar exemplos nos schemas
+            </summary>
+        </member>
+        <member name="T:PetShopAPI.Configuration.ExampleOperationFilter">
+            <summary>
+            Filtro para adicionar exemplos nas operações
+            </summary>
+        </member>
+        <member name="T:PetShopAPI.Controllers.AuthController">
+            <summary>
+            Controller para autenticação de usuários (clientes e administradores)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.AuthController.LoginCliente(PetShopAPI.DTOs.LoginDto)">
+            <summary>
+            Realiza login de cliente no sistema
+            </summary>
+            <param name="loginDto">Dados de login (email e senha)</param>
+            <returns>Token de autenticação e informações do usuário</returns>
+            <response code="200">Login realizado com sucesso</response>
+            <response code="401">Email ou senha incorretos</response>
+            <response code="400">Dados de entrada inválidos</response>
+        </member>
+        <member name="M:PetShopAPI.Controllers.AuthController.LoginAdministrador(PetShopAPI.DTOs.LoginDto)">
+            <summary>
+            Login de administrador
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.AuthController.RegistrarCliente(PetShopAPI.DTOs.ClienteRegistroDto)">
+            <summary>
+            Registro de novo cliente
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.AuthController.Logout">
+            <summary>
+            Logout (invalida o token)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.AuthController.ValidateToken">
+            <summary>
+            Valida se o token ainda é válido
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.AuthController.RegistrarAdministrador(PetShopAPI.DTOs.AdministradorRegistroDto)">
+            <summary>
+            Registro de novo administrador (apenas para super admin)
+            </summary>
+        </member>
+        <member name="T:PetShopAPI.Controllers.CarrinhoController">
+            <summary>
+            Controller para gerenciamento do carrinho de compras
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CarrinhoController.GetCarrinho(System.Int32)">
+            <summary>
+            Obtém o carrinho de compras do cliente
+            </summary>
+            <param name="clienteId">ID do cliente</param>
+            <returns>Carrinho de compras com produtos e total</returns>
+            <response code="200">Carrinho retornado com sucesso</response>
+            <response code="404">Cliente não encontrado</response>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CarrinhoController.AdicionarItem(System.Int32,PetShopAPI.DTOs.AdicionarCarrinhoDto)">
+            <summary>
+            Adiciona um item ao carrinho
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CarrinhoController.AtualizarItem(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Atualiza a quantidade de um item no carrinho
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CarrinhoController.RemoverItem(System.Int32,System.Int32)">
+            <summary>
+            Remove um item do carrinho
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CarrinhoController.LimparCarrinho(System.Int32)">
+            <summary>
+            Limpa o carrinho
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CarrinhoController.FinalizarCompra(System.Int32,System.Int32)">
+            <summary>
+            Finaliza a compra (converte carrinho em pedido)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CategoriasController.GetCategorias">
+            <summary>
+            Obtém todas as categorias
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CategoriasController.GetCategoria(System.Int32)">
+            <summary>
+            Obtém uma categoria específica por ID
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CategoriasController.CreateCategoria(PetShopAPI.DTOs.CategoriaCreateDto)">
+            <summary>
+            Cria uma nova categoria (Admin)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CategoriasController.UpdateCategoria(System.Int32,PetShopAPI.DTOs.CategoriaCreateDto)">
+            <summary>
+            Atualiza uma categoria existente (Admin)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CategoriasController.DeleteCategoria(System.Int32)">
+            <summary>
+            Remove uma categoria (Admin)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ClientesController.GetCliente(System.Int32)">
+            <summary>
+            Obtém um cliente por ID (apenas dados básicos para SQL Server)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ClientesController.AdicionarEndereco(System.Int32,PetShopAPI.DTOs.EnderecoCreateDto)">
+            <summary>
+            Adiciona um endereço ao cliente
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ClientesController.GetEndereco(System.Int32)">
+            <summary>
+            Obtém um endereço específico
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ClientesController.GetEnderecosByCliente(System.Int32)">
+            <summary>
+            Obtém endereços de um cliente
+            </summary>
+        </member>
+        <member name="T:PetShopAPI.Controllers.FavoritosController">
+            <summary>
+            Controller para gerenciamento de favoritos
+            Implementa RF12: Sistema deverá permitir que o cliente possa favoritar produtos
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.FavoritosController.GetFavoritos">
+            <summary>
+            Lista todos os favoritos do cliente logado
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.FavoritosController.AdicionarFavorito(PetShopAPI.DTOs.AdicionarFavoritoDto)">
+            <summary>
+            Adiciona um produto aos favoritos
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.FavoritosController.RemoverFavorito(System.Int32)">
+            <summary>
+            Remove um produto dos favoritos
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.FavoritosController.VerificarFavorito(System.Int32)">
+            <summary>
+            Verifica se um produto está nos favoritos do cliente
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.PedidosController.GetPedidos">
+            <summary>
+            Obtém todos os pedidos (Admin)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.PedidosController.GetPedidosByCliente(System.Int32)">
+            <summary>
+            Obtém pedidos de um cliente específico
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.PedidosController.GetPedido(System.Int32)">
+            <summary>
+            Obtém um pedido específico por ID
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.PedidosController.CreatePedido(PetShopAPI.DTOs.PedidoCreateDto)">
+            <summary>
+            Cria um novo pedido
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.PedidosController.UpdateStatus(System.Int32,PetShopAPI.Models.StatusPedido)">
+            <summary>
+            Atualiza o status de um pedido (Admin)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.PedidosController.CancelarPedido(System.Int32)">
+            <summary>
+            Cancela um pedido
+            </summary>
+        </member>
+        <member name="T:PetShopAPI.Controllers.ProdutosController">
+            <summary>
+            Controller para gerenciamento de produtos do PetShop
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ProdutosController.GetProdutos(System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean})">
+            <summary>
+            Obtém lista de produtos com filtros opcionais
+            </summary>
+            <param name="categoriaId">Filtrar por ID da categoria (opcional)</param>
+            <param name="termo">Termo para busca no nome ou descrição (opcional)</param>
+            <param name="ativo">Filtrar apenas produtos ativos (opcional)</param>
+            <returns>Lista de produtos filtrados</returns>
+            <response code="200">Lista de produtos retornada com sucesso</response>
+            <response code="500">Erro interno do servidor</response>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ProdutosController.GetProduto(System.Int32)">
+            <summary>
+            Obtém um produto específico por ID
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ProdutosController.CreateProduto(PetShopAPI.DTOs.ProdutoCreateDto)">
+            <summary>
+            Cria um novo produto (Admin)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ProdutosController.UpdateProduto(System.Int32,PetShopAPI.DTOs.ProdutoUpdateDto)">
+            <summary>
+            Atualiza um produto existente (Admin)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ProdutosController.DeleteProduto(System.Int32)">
+            <summary>
+            Remove um produto logicamente (Admin) - Define como inativo
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ProdutosController.UpdateEstoque(System.Int32,System.Int32)">
+            <summary>
+            Atualiza apenas o estoque de um produto (Admin)
+            </summary>
+        </member>
+        <member name="T:PetShopAPI.DTOs.FavoritoDto">
+            <summary>
+            DTO para operações com favoritos
+            Implementa RF12: Sistema deverá permitir que o cliente possa favoritar produtos
+            </summary>
+        </member>
+        <member name="T:PetShopAPI.Models.Favorito">
+            <summary>
+            Modelo para produtos favoritos dos clientes
+            Implementa RF12: Sistema deverá permitir que o cliente possa favoritar produtos
+            </summary>
+        </member>
+        <member name="T:PetShopAPI.Models.ProdutoCategoria">
+            <summary>
+            Tabela de relacionamento many-to-many entre Produto e Categoria
+            Implementa RN01: Um produto pode pertencer a uma ou mais categorias
+            </summary>
+        </member>
+        <member name="T:PetShopAPI.Services.ICarrinhoService">
+            <summary>
+            Serviço para gerenciamento do carrinho de compras
+            Implementa RN08: Carrinho deve ser esvaziado após finalização do pedido
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Services.CarrinhoService.LimparCarrinho(System.Int32)">
+            <summary>
+            Limpa o carrinho do cliente após finalização do pedido
+            Implementa RN08: Carrinho automaticamente esvaziado após finalização
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,280 @@
+/* Custom Swagger UI Styles for PetShop API */
+
+:root {
+    --petshop-primary: #2E8B57;
+    --petshop-secondary: #FF6B35;
+    --petshop-accent: #4ECDC4;
+    --petshop-dark: #2C3E50;
+    --petshop-light: #ECF0F1;
+}
+
+/* Header customization */
+.swagger-ui .topbar {
+    background: linear-gradient(135deg, var(--petshop-primary), var(--petshop-accent));
+    border-bottom: 3px solid var(--petshop-secondary);
+}
+
+.swagger-ui .topbar .download-url-wrapper {
+    display: none;
+}
+
+/* Logo area */
+.swagger-ui .info .title {
+    color: var(--petshop-dark);
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.swagger-ui .info .title::before {
+    content: "🐾 ";
+    font-size: 2rem;
+    margin-right: 10px;
+}
+
+/* Info section styling */
+.swagger-ui .info {
+    background: linear-gradient(135deg, #ffffff, var(--petshop-light));
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.swagger-ui .info .description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--petshop-dark);
+}
+
+/* Operation styling */
+.swagger-ui .opblock {
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.swagger-ui .opblock:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+/* HTTP method colors */
+.swagger-ui .opblock.opblock-get {
+    border-color: var(--petshop-primary);
+}
+
+.swagger-ui .opblock.opblock-get .opblock-summary {
+    border-color: var(--petshop-primary);
+}
+
+.swagger-ui .opblock.opblock-post {
+    border-color: var(--petshop-secondary);
+}
+
+.swagger-ui .opblock.opblock-post .opblock-summary {
+    border-color: var(--petshop-secondary);
+}
+
+.swagger-ui .opblock.opblock-put {
+    border-color: var(--petshop-accent);
+}
+
+.swagger-ui .opblock.opblock-put .opblock-summary {
+    border-color: var(--petshop-accent);
+}
+
+.swagger-ui .opblock.opblock-delete {
+    border-color: #e74c3c;
+}
+
+.swagger-ui .opblock.opblock-delete .opblock-summary {
+    border-color: #e74c3c;
+}
+
+/* Tag groups */
+.swagger-ui .opblock-tag {
+    background: linear-gradient(135deg, var(--petshop-dark), #34495e);
+    color: white;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin: 20px 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.swagger-ui .opblock-tag::before {
+    content: "📂 ";
+    margin-right: 8px;
+}
+
+/* Authorization button */
+.swagger-ui .auth-wrapper .authorize {
+    background: var(--petshop-secondary);
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.swagger-ui .auth-wrapper .authorize:hover {
+    background: #e55a2b;
+    transform: scale(1.05);
+}
+
+/* Response sections */
+.swagger-ui .responses-wrapper {
+    border-radius: 8px;
+    background: #f8f9fa;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+/* Parameters section */
+.swagger-ui .parameters-wrapper {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 15px;
+    border: 1px solid #e1e8ed;
+}
+
+/* Execute button */
+.swagger-ui .btn.execute {
+    background: var(--petshop-primary);
+    border: none;
+    border-radius: 6px;
+    padding: 12px 25px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.swagger-ui .btn.execute:hover {
+    background: #267d4a;
+    transform: scale(1.05);
+}
+
+/* Response body */
+.swagger-ui .response-col_description {
+    background: #f1f5f9;
+    border-radius: 6px;
+    padding: 15px;
+}
+
+/* Models section */
+.swagger-ui .model-container {
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #e1e8ed;
+    padding: 20px;
+    margin: 15px 0;
+}
+
+.swagger-ui .model .model-title {
+    color: var(--petshop-dark);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Try it out button */
+.swagger-ui .btn.try-out__btn {
+    background: var(--petshop-accent);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.swagger-ui .btn.try-out__btn:hover {
+    background: #45b7aa;
+}
+
+/* Clear button */
+.swagger-ui .btn.clear {
+    background: #6c757d;
+    border: none;
+    border-radius: 4px;
+    color: white;
+}
+
+/* Loading indicator */
+.swagger-ui .loading-container {
+    background: linear-gradient(135deg, var(--petshop-primary), var(--petshop-accent));
+}
+
+/* Scrollbar customization */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--petshop-primary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #267d4a;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .swagger-ui .info .title {
+        font-size: 2rem;
+    }
+    
+    .swagger-ui .info {
+        padding: 20px;
+    }
+    
+    .swagger-ui .opblock-tag {
+        padding: 12px 15px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Animation for better UX */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.swagger-ui .opblock {
+    animation: slideIn 0.5s ease-out;
+}
+
+/* Status code styling */
+.swagger-ui .response-col_status {
+    font-weight: bold;
+}
+
+.swagger-ui .response-col_status .response-undocumented {
+    color: var(--petshop-secondary);
+}
+
+/* Footer enhancement */
+.swagger-ui::after {
+    content: "🐾 PetShop API - Desenvolvido com .NET 9 e amor por pets! 🐾";
+    display: block;
+    text-align: center;
+    padding: 20px;
+    background: var(--petshop-light);
+    color: var(--petshop-dark);
+    font-weight: bold;
+    margin-top: 30px;
+    border-radius: 8px;
+}

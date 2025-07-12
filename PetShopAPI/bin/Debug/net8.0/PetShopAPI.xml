@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PetShopAPI</name>
+    </assembly>
+    <members>
+        <member name="M:PetShopAPI.Controllers.AuthController.LoginCliente(PetShopAPI.DTOs.LoginDto)">
+            <summary>
+            Login de cliente
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.AuthController.LoginAdministrador(PetShopAPI.DTOs.LoginDto)">
+            <summary>
+            Login de administrador
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.AuthController.RegistrarCliente(PetShopAPI.DTOs.ClienteRegistroDto)">
+            <summary>
+            Registro de novo cliente
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.AuthController.Logout">
+            <summary>
+            Logout (invalida o token)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.AuthController.ValidateToken">
+            <summary>
+            Valida se o token ainda é válido
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CarrinhoController.GetCarrinho(System.Int32)">
+            <summary>
+            Obtém o carrinho do cliente
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CarrinhoController.AdicionarItem(System.Int32,PetShopAPI.DTOs.AdicionarCarrinhoDto)">
+            <summary>
+            Adiciona um item ao carrinho
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CarrinhoController.AtualizarItem(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Atualiza a quantidade de um item no carrinho
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CarrinhoController.RemoverItem(System.Int32,System.Int32)">
+            <summary>
+            Remove um item do carrinho
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CarrinhoController.LimparCarrinho(System.Int32)">
+            <summary>
+            Limpa o carrinho
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CarrinhoController.FinalizarCompra(System.Int32,System.Int32)">
+            <summary>
+            Finaliza a compra (converte carrinho em pedido)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CategoriasController.GetCategorias">
+            <summary>
+            Obtém todas as categorias
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CategoriasController.GetCategoria(System.Int32)">
+            <summary>
+            Obtém uma categoria específica por ID
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CategoriasController.CreateCategoria(PetShopAPI.DTOs.CategoriaCreateDto)">
+            <summary>
+            Cria uma nova categoria (Admin)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CategoriasController.UpdateCategoria(System.Int32,PetShopAPI.DTOs.CategoriaCreateDto)">
+            <summary>
+            Atualiza uma categoria existente (Admin)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.CategoriasController.DeleteCategoria(System.Int32)">
+            <summary>
+            Remove uma categoria (Admin)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ClientesController.GetCliente(System.Int32)">
+            <summary>
+            Obtém um cliente por ID (apenas dados básicos para SQL Server)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ClientesController.AdicionarEndereco(System.Int32,PetShopAPI.DTOs.EnderecoCreateDto)">
+            <summary>
+            Adiciona um endereço ao cliente
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ClientesController.GetEndereco(System.Int32)">
+            <summary>
+            Obtém um endereço específico
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ClientesController.GetEnderecosByCliente(System.Int32)">
+            <summary>
+            Obtém endereços de um cliente
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.PedidosController.GetPedidos">
+            <summary>
+            Obtém todos os pedidos (Admin)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.PedidosController.GetPedidosByCliente(System.Int32)">
+            <summary>
+            Obtém pedidos de um cliente específico
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.PedidosController.GetPedido(System.Int32)">
+            <summary>
+            Obtém um pedido específico por ID
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.PedidosController.CreatePedido(PetShopAPI.DTOs.PedidoCreateDto)">
+            <summary>
+            Cria um novo pedido
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.PedidosController.UpdateStatus(System.Int32,PetShopAPI.Models.StatusPedido)">
+            <summary>
+            Atualiza o status de um pedido (Admin)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.PedidosController.CancelarPedido(System.Int32)">
+            <summary>
+            Cancela um pedido
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ProdutosController.GetProdutos(System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean})">
+            <summary>
+            Obtém todos os produtos com filtros opcionais
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ProdutosController.GetProduto(System.Int32)">
+            <summary>
+            Obtém um produto específico por ID
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ProdutosController.CreateProduto(PetShopAPI.DTOs.ProdutoCreateDto)">
+            <summary>
+            Cria um novo produto (Admin)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ProdutosController.UpdateProduto(System.Int32,PetShopAPI.DTOs.ProdutoUpdateDto)">
+            <summary>
+            Atualiza um produto existente (Admin)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ProdutosController.DeleteProduto(System.Int32)">
+            <summary>
+            Remove um produto (Admin)
+            </summary>
+        </member>
+        <member name="M:PetShopAPI.Controllers.ProdutosController.UpdateEstoque(System.Int32,System.Int32)">
+            <summary>
+            Atualiza apenas o estoque de um produto (Admin)
+            </summary>
+        </member>
+    </members>
+</doc>

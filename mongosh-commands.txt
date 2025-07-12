@@ -1,0 +1,37 @@
+MongoDB Shell Commands for PetShop Database Setup
+==================================================
+
+1. Open mongosh CLI and run:
+   mongosh mongodb://localhost:27017
+
+2. Copy and paste these commands one by one:
+
+// Switch to petshop database
+use petshop
+
+// Create all collections with validation (copy this entire block)
+db.createCollection("administradores", {validator: {$jsonSchema: {bsonType: "object", required: ["nome", "email", "senha"], properties: {nome: {bsonType: "string"}, email: {bsonType: "string"}, senha: {bsonType: "string"}}}}});
+
+db.createCollection("clientes", {validator: {$jsonSchema: {bsonType: "object", required: ["nome", "email", "senha"], properties: {nome: {bsonType: "string"}, email: {bsonType: "string"}, telefone: {bsonType: "string"}, senha: {bsonType: "string"}, enderecos: {bsonType: "array", items: {bsonType: "object", required: ["_id_endereco", "logradouro", "numero", "cidade", "estado", "cep"], properties: {_id_endereco: {bsonType: "objectId"}, logradouro: {bsonType: "string"}, numero: {bsonType: "string"}, complemento: {bsonType: "string"}, cidade: {bsonType: "string"}, estado: {bsonType: "string"}, cep: {bsonType: "string"}}}}}}}});
+
+db.createCollection("categorias", {validator: {$jsonSchema: {bsonType: "object", required: ["nome"], properties: {nome: {bsonType: "string"}}}}});
+
+db.createCollection("produtos", {validator: {$jsonSchema: {bsonType: "object", required: ["nome", "preco", "estoque", "idCategoria"], properties: {nome: {bsonType: "string"}, descricao: {bsonType: "string"}, preco: {bsonType: "decimal"}, estoque: {bsonType: "int"}, idCategoria: {bsonType: "objectId"}}}}});
+
+db.createCollection("pedidos", {validator: {$jsonSchema: {bsonType: "object", required: ["idCliente", "idEnderecoEntrega", "logradouro", "numero", "cidade", "estado", "cep", "dataPedido", "statusPedido", "valorTotal", "itens"], properties: {idCliente: {bsonType: "objectId"}, idEnderecoEntrega: {bsonType: "objectId"}, logradouro: {bsonType: "string"}, numero: {bsonType: "string"}, complemento: {bsonType: "string"}, cidade: {bsonType: "string"}, estado: {bsonType: "string"}, cep: {bsonType: "string"}, dataPedido: {bsonType: "date"}, statusPedido: {bsonType: "string", enum: ["PENDENTE", "PROCESSANDO", "ENVIADO", "ENTREGUE", "CANCELADO"]}, valorTotal: {bsonType: "decimal"}, itens: {bsonType: "array", items: {bsonType: "object", required: ["idProduto", "nomeProduto", "quantidade", "precoUnitario"], properties: {idProduto: {bsonType: "objectId"}, nomeProduto: {bsonType: "string"}, quantidade: {bsonType: "int"}, precoUnitario: {bsonType: "decimal"}}}}}}}});
+
+// Create indexes
+db.administradores.createIndex({ email: 1 }, { unique: true });
+db.clientes.createIndex({ email: 1 }, { unique: true });
+db.produtos.createIndex({ idCategoria: 1 });
+db.pedidos.createIndex({ idCliente: 1 });
+db.pedidos.createIndex({ statusPedido: 1 });
+db.pedidos.createIndex({ dataPedido: -1 });
+
+// Verify collections were created
+show collections
+
+// Check one collection structure
+db.administradores.stats()
+
+3. You should see output confirming all collections were created successfully!
