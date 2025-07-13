@@ -1,3 +1,4 @@
+import { useAuth } from '../../context/AuthContext';
 
 const leftMenu = [
     { label: '🐾 PetShop Online', path: '/', isLogo: true },
@@ -11,6 +12,16 @@ const rightMenu = [
 ];
 
 export default function HomeMenu({ horizontal = true }: { horizontal?: boolean }) {
+    const { auth } = useAuth();
+
+    const rightMenu = [
+        { label: 'Carrinho', path: '/carrinho', icon: '' },
+        { label: 'Meus Pedidos', path: '/pedidos', icon: '' },
+        auth
+            ? { label: 'Meu perfil', path: '/perfil', icon: '' }
+            : { label: 'Fazer login', path: '/login', icon: '' }
+    ];
+
     return (
         <nav style={{
             width: '100%',

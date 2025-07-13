@@ -25,6 +25,7 @@ export default function LoginForm() {
             const result = await authService.login({ email, senha });
             if (result.token) {
                 login(result.token, result.userType, result.userId);
+                navigate('/');
             }
         } catch (err: any) {
             setError(err.message || 'Email ou senha incorretos');

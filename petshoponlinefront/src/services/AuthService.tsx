@@ -22,4 +22,14 @@ async function login({ email, senha }: { email: string, senha: string }) {
     return data;
 }
 
-export default { cadastro, login };
+async function logout(token?: string) {
+    await fetch(`${API_URL}/logout`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    });
+}
+
+export default { cadastro, login, logout };

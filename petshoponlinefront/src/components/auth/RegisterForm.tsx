@@ -27,6 +27,7 @@ export default function RegisterForm() {
             const result = await authService.cadastro({ nome, email, senha, telefone });
             if (result.token) {
                 login(result.token, result.userType, result.userId);
+                navigate('/login');
             }
         } catch (err: any) {
             setError(err.message || 'Erro ao cadastrar');
