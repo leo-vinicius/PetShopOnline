@@ -1,4 +1,4 @@
-const API_URL = 'https://localhost:7001/api/auth';
+const API_URL = 'https://localhost:7001/api/Auth';
 
 async function cadastro({ nome, email, senha, telefone }: { nome: string, email: string, senha: string, telefone?: string }) {
     const res = await fetch(`${API_URL}/cliente/registro`, {
@@ -8,7 +8,6 @@ async function cadastro({ nome, email, senha, telefone }: { nome: string, email:
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || 'Erro no cadastro');
-    // Após cadastro, pode realizar login automático se desejar
     return data;
 }
 
