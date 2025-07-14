@@ -14,6 +14,8 @@ export default function Router() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/perfil" element={<ProfilePage />} />
                 <Route path="/admin" element={<AdminPage />} />
+                <Route path="/carrinho" element={<CartPage />} />
+                <Route path="/produtos" element={<ProductPage />} />
             </Routes>
         </BrowserRouter>
     );
