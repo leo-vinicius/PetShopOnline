@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import AdminPage from './pages/AdminPage';
 import Home from './pages/Home';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
@@ -12,6 +13,7 @@ export default function Router() {
                 <Route path="/cadastro" element={<CadastroPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/perfil" element={<ProfilePage />} />
+                <Route path="/admin" element={<AdminPage />} />
             </Routes>
         </BrowserRouter>
     );
