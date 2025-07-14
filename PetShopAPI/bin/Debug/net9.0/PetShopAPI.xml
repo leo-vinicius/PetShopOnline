@@ -143,6 +143,11 @@
             Obtém um cliente por ID (apenas dados básicos para SQL Server)
             </summary>
         </member>
+        <member name="M:PetShopAPI.Controllers.ClientesController.GetClientes">
+            <summary>
+            Obtém todos os clientes (apenas dados básicos para SQL Server)
+            </summary>
+        </member>
         <member name="M:PetShopAPI.Controllers.ClientesController.AdicionarEndereco(System.Int32,PetShopAPI.DTOs.EnderecoCreateDto)">
             <summary>
             Adiciona um endereço ao cliente

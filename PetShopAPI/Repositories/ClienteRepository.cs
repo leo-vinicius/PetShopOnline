@@ -7,6 +7,7 @@ namespace PetShopAPI.Repositories
     public interface IClienteRepository
     {
         Task<Cliente?> GetByIdAsync(int id);
+        Task<IEnumerable<Cliente?>> GetAllAsync();
         Task<Cliente?> GetByEmailAsync(string email);
         Task<Cliente> CreateAsync(Cliente cliente);
         Task<Cliente> UpdateAsync(Cliente cliente);
@@ -28,6 +29,13 @@ namespace PetShopAPI.Repositories
             return await _context.Clientes
                 .Include(c => c.Enderecos)
                 .FirstOrDefaultAsync(c => c.IdCliente == id);
+        }
+
+        public async Task<IEnumerable<Cliente?>> GetAllAsync()
+        {
+            return await _context.Clientes
+            .Include(c => c.Enderecos)
+            .ToListAsync();
         }
 
         public async Task<Cliente?> GetByEmailAsync(string email)

@@ -1,9 +1,10 @@
+using System.Security.Cryptography;
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using PetShopAPI.DTOs;
 using PetShopAPI.Models;
 using PetShopAPI.Repositories;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace PetShopAPI.Controllers
 {
@@ -51,6 +52,38 @@ namespace PetShopAPI.Controllers
             };
 
             return Ok(clienteDto);
+        }
+
+        /// <summary>
+        /// Obtém todos os clientes (apenas dados básicos para SQL Server)
+        /// </summary>
+        public async Task<ActionResult<ClienteDto>> GetClientes()
+        {
+            var clientes = await _clienteRepository.GetAllAsync();
+
+            if (clientes == null || !clientes.Any())
+                return NotFound("Não há nenhum cliente registrado.");
+
+            var clientesDto = clientes.Select(cliente => new ClienteDto
+            {
+                IdCliente = cliente.IdCliente,
+                Nome = cliente.Nome,
+                Email = cliente.Email,
+                Telefone = cliente.Telefone,
+                Enderecos = cliente.Enderecos.Select(e => new EnderecoDto
+                {
+                    IdEndereco = e.IdEndereco,
+                    Logradouro = e.Logradouro,
+                    Numero = e.Numero,
+                    Bairro = e.Bairro,
+                    Cidade = e.Cidade,
+                    Estado = e.Estado,
+                    Cep = e.Cep,
+                    ClienteId = e.ClienteId
+                }).ToList()
+            });
+
+            return Ok(clientesDto);
         }
 
         /// <summary>

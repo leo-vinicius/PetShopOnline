@@ -3,9 +3,7 @@
   "dotnet.defaultSolution": "PetShopAPI/PetShopAPI.sln",
   // C# Development Settings
   "omnisharp.enableEditorConfigSupport": true,
-  "omnisharp.enableImportCompletion": true,
   "omnisharp.enableRoslynAnalyzers": true,
-  "omnisharp.organizeImportsOnFormat": true,
   "omnisharp.enableAsyncCompletion": true,
   "omnisharp.useModernNet": true,
   // .NET 9 Specific Settings
@@ -139,9 +137,6 @@
   "omnisharp.path": "latest",
   "omnisharp.useGlobalMono": "never",
   "omnisharp.waitForDebugger": false,
-  // Code Lens
-  "csharp.referencesCodeLens.enabled": true,
-  "csharp.testsCodeLens.enabled": true,
   // Symbol Information
   "csharp.semanticHighlighting.enabled": true,
   "editor.semanticTokenColorCustomizations": {
@@ -154,5 +149,7 @@
       "variable": "#9CDCFE",
       "parameter": "#9CDCFE"
     }
-  }
+  },
+  "dotnet.codeLens.enableTestsCodeLens": true,
+  "dotnet.formatting.organizeImportsOnFormat": true
 }
