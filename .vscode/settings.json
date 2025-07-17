@@ -1,0 +1,18 @@
+{
+    "dotnet.defaultSolution": "PetShopPro.Api/PetShopPro.Api.csproj",
+    "omnisharp.defaultLaunchSolution": "PetShopPro.Api/PetShopPro.Api.csproj",
+    "files.exclude": {
+        "**/bin": true,
+        "**/obj": true
+    },
+    "csharp.semanticHighlighting.enabled": true,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true,
+    "dotnet.enablePackageRestore": true,
+    "rest-client.defaultHeaders": {
+        "Content-Type": "application/json"
+    }
+}

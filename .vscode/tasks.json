@@ -1,0 +1,95 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "build",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"build",
+				"${workspaceFolder}/PetShopPro.Api/PetShopPro.Api.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"problemMatcher": "$msCompile",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "Run PetShop API",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"run"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/PetShopPro.Api"
+			},
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "watch",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"watch",
+				"run",
+				"--project",
+				"${workspaceFolder}/PetShopPro.Api/PetShopPro.Api.csproj"
+			],
+			"problemMatcher": "$msCompile",
+			"isBackground": true,
+			"runOptions": {
+				"instanceLimit": 1
+			},
+			"group": "build"
+		},
+		{
+			"label": "ef-add-migration",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"ef",
+				"migrations",
+				"add",
+				"${input:migrationName}",
+				"--project",
+				"${workspaceFolder}/PetShopPro.Api/PetShopPro.Api.csproj"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/PetShopPro.Api"
+			},
+			"group": "build",
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "ef-update-database",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"ef",
+				"database",
+				"update",
+				"--project",
+				"${workspaceFolder}/PetShopPro.Api/PetShopPro.Api.csproj"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/PetShopPro.Api"
+			},
+			"group": "build",
+			"problemMatcher": "$msCompile"
+		}
+	],
+	"inputs": [
+		{
+			"id": "migrationName",
+			"description": "Enter migration name",
+			"default": "NewMigration",
+			"type": "promptString"
+		}
+	]
+}

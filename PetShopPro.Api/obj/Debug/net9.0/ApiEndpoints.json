@@ -1,0 +1,465 @@
+[
+  {
+    "ContainingType": "PetShopPro.Api.Features.Administradores.AdministradoresController",
+    "Method": "Create",
+    "RelativePath": "api/Administradores",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "PetShopPro.Api.Features.Administradores.CreateAdministradorRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PetShopPro.Api.Shared.DTOs.ApiResponse\u00601[[PetShopPro.Api.Features.Administradores.AdministradorDto, PetShopPro.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Administradores"
+    ]
+  },
+  {
+    "ContainingType": "PetShopPro.Api.Features.Auth.AuthController",
+    "Method": "LoginAdministrador",
+    "RelativePath": "api/Auth/administrador/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "PetShopPro.Api.Shared.DTOs.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PetShopPro.Api.Shared.DTOs.ApiResponse\u00601[[PetShopPro.Api.Shared.DTOs.LoginResponse, PetShopPro.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Autentica\u00E7\u00E3o"
+    ]
+  },
+  {
+    "ContainingType": "PetShopPro.Api.Features.Auth.AuthController",
+    "Method": "LoginCliente",
+    "RelativePath": "api/Auth/cliente/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "PetShopPro.Api.Shared.DTOs.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PetShopPro.Api.Shared.DTOs.ApiResponse\u00601[[PetShopPro.Api.Shared.DTOs.LoginResponse, PetShopPro.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Autentica\u00E7\u00E3o"
+    ]
+  },
+  {
+    "ContainingType": "PetShopPro.Api.Features.Carrinho.CarrinhoController",
+    "Method": "Get",
+    "RelativePath": "api/Carrinho",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "PetShopPro.Api.Shared.DTOs.ApiResponse\u00601[[PetShopPro.Api.Features.Carrinho.CarrinhoDto, PetShopPro.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Carrinho"
+    ]
+  },
+  {
+    "ContainingType": "PetShopPro.Api.Features.Carrinho.CarrinhoController",
+    "Method": "AdicionarItem",
+    "RelativePath": "api/Carrinho/items",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "PetShopPro.Api.Features.Carrinho.AdicionarItemRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PetShopPro.Api.Shared.DTOs.ApiResponse\u00601[[PetShopPro.Api.Features.Carrinho.CarrinhoDto, PetShopPro.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Carrinho"
+    ]
+  },
+  {
+    "ContainingType": "PetShopPro.Api.Features.Carrinho.CarrinhoController",
+    "Method": "RemoverItem",
+    "RelativePath": "api/Carrinho/items/{produtoId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "produtoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PetShopPro.Api.Shared.DTOs.ApiResponse\u00601[[PetShopPro.Api.Features.Carrinho.CarrinhoDto, PetShopPro.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Carrinho"
+    ]
+  },
+  {
+    "ContainingType": "PetShopPro.Api.Features.Categorias.CategoriasController",
+    "Method": "Get",
+    "RelativePath": "api/Categorias",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "PetShopPro.Api.Shared.DTOs.ApiResponse\u00601[[System.Collections.Generic.List\u00601[[PetShopPro.Api.Features.Categorias.CategoriaDto, PetShopPro.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Categorias"
+    ]
+  },
+  {
+    "ContainingType": "PetShopPro.Api.Features.Categorias.CategoriasController",
+    "Method": "Create",
+    "RelativePath": "api/Categorias",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "PetShopPro.Api.Features.Categorias.CreateCategoriaRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PetShopPro.Api.Shared.DTOs.ApiResponse\u00601[[PetShopPro.Api.Features.Categorias.CategoriaDto, PetShopPro.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Categorias"
+    ]
+  },
+  {
+    "ContainingType": "PetShopPro.Api.Features.Clientes.ClientesController",
+    "Method": "Create",
+    "RelativePath": "api/Clientes",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "PetShopPro.Api.Features.Clientes.CreateClienteRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PetShopPro.Api.Shared.DTOs.ApiResponse\u00601[[PetShopPro.Api.Features.Clientes.ClienteDto, PetShopPro.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Clientes"
+    ]
+  },
+  {
+    "ContainingType": "PetShopPro.Api.Features.Clientes.ClientesController",
+    "Method": "GetTodosClientes",
+    "RelativePath": "api/Clientes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "PetShopPro.Api.Shared.DTOs.ApiResponse\u00601[[System.Collections.Generic.List\u00601[[PetShopPro.Api.Features.Clientes.ClienteDto, PetShopPro.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Clientes"
+    ]
+  },
+  {
+    "ContainingType": "PetShopPro.Api.Features.Clientes.ClientesController",
+    "Method": "CreateEndereco",
+    "RelativePath": "api/Clientes/enderecos",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "PetShopPro.Api.Features.Clientes.CreateEnderecoRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PetShopPro.Api.Shared.DTOs.ApiResponse\u00601[[PetShopPro.Api.Features.Clientes.EnderecoDto, PetShopPro.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Clientes"
+    ]
+  },
+  {
+    "ContainingType": "PetShopPro.Api.Features.Clientes.ClientesController",
+    "Method": "GetMeusEnderecos",
+    "RelativePath": "api/Clientes/enderecos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "PetShopPro.Api.Shared.DTOs.ApiResponse\u00601[[System.Collections.Generic.List\u00601[[PetShopPro.Api.Features.Clientes.EnderecoDto, PetShopPro.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Clientes"
+    ]
+  },
+  {
+    "ContainingType": "PetShopPro.Api.Features.Pedidos.PedidosController",
+    "Method": "GetMeusPedidos",
+    "RelativePath": "api/Pedidos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "PetShopPro.Api.Shared.DTOs.ApiResponse\u00601[[System.Collections.Generic.List\u00601[[PetShopPro.Api.Features.Pedidos.PedidoDto, PetShopPro.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Pedidos"
+    ]
+  },
+  {
+    "ContainingType": "PetShopPro.Api.Features.Pedidos.PedidosController",
+    "Method": "ConfirmarPedido",
+    "RelativePath": "api/Pedidos/confirmar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "PetShopPro.Api.Features.Pedidos.CreatePedidoRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PetShopPro.Api.Shared.DTOs.ApiResponse\u00601[[PetShopPro.Api.Features.Pedidos.PedidoDto, PetShopPro.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Pedidos"
+    ]
+  },
+  {
+    "ContainingType": "PetShopPro.Api.Features.Produtos.ProdutosController",
+    "Method": "Get",
+    "RelativePath": "api/Produtos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoriaId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PetShopPro.Api.Shared.DTOs.ApiResponse\u00601[[System.Collections.Generic.List\u00601[[PetShopPro.Api.Features.Produtos.ProdutoDto, PetShopPro.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Produtos"
+    ]
+  },
+  {
+    "ContainingType": "PetShopPro.Api.Features.Produtos.ProdutosController",
+    "Method": "Create",
+    "RelativePath": "api/Produtos",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "PetShopPro.Api.Features.Produtos.CreateProdutoRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PetShopPro.Api.Shared.DTOs.ApiResponse\u00601[[PetShopPro.Api.Features.Produtos.ProdutoDto, PetShopPro.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Produtos"
+    ]
+  },
+  {
+    "ContainingType": "PetShopPro.Api.Features.Produtos.ProdutosController",
+    "Method": "GetById",
+    "RelativePath": "api/Produtos/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PetShopPro.Api.Shared.DTOs.ApiResponse\u00601[[PetShopPro.Api.Features.Produtos.ProdutoDto, PetShopPro.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Produtos"
+    ]
+  }
+]
