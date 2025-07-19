@@ -1,169 +1,205 @@
-# PetShop Database & API Setup
+# PetShop Pro API - Guia de Teste
 
-Complete setup for a PetShop application supporting both **MongoDB** and **SQL Server** databases, plus a **C# Web API**.
+## Como executar a aplicação
 
-## 📁 Project Structure
-
-```
-PetShop/
-├── 📊 Database Scripts/
-│   ├── MongoDB/
-│   │   ├── setup-petshop-db.js
-│   │   ├── sample-data.js
-│   │   └── mongosh-commands.txt
-│   └── SQL Server/
-│       ├── create-sqlserver-database.sql
-│       ├── create-schema-only.sql
-│       └── insert-sample-data.sql
-├── 🚀 PetShopAPI/           # C# Web API (.NET 8)
-│   ├── Controllers/
-│   ├── Models/
-│   ├── DTOs/
-│   ├── Data/
-│   └── Repositories/
-└── 📖 Documentation/
-    └── README.md
+1. Navegue até o diretório do projeto:
+```bash
+cd "c:\SourceCode\PetShopPro\PetShopPro.Api"
 ```
 
-## Prerequisites
+2. Execute a aplicação:
+```bash
+dotnet run
+```
 
-### Database Options
-**MongoDB Setup**
-- MongoDB running on localhost:27017
-- MongoDB Compass or mongosh CLI
+A API estará disponível em:
+- HTTPS: https://localhost:7000
+- HTTP: http://localhost:5000
+- Swagger UI: https://localhost:7000/swagger
 
-**SQL Server Setup**  
-- SQL Server instance (local or remote)
-- SQL Server Management Studio (SSMS) or Azure Data Studio
+## Testando a API
 
-### API Setup
-- .NET 8 SDK
-- Visual Studio 2022 or VS Code
+### 1. Criar um Administrador
+```http
+POST /api/administradores
+Content-Type: application/json
 
-## Database Schema
+{
+  "nome": "Admin Master",
+  "email": "admin@petshop.com",
+  "telefone": "11999999999",
+  "senha": "admin123"
+}
+```
 
-The following collections will be created in the `petshop` database:
+### 2. Login do Administrador
+```http
+POST /api/auth/administrador/login
+Content-Type: application/json
 
-### 1. Administradores
-- `_id`: ObjectId
-- `nome`: String (required)
-- `email`: String (required, unique)
-- `senha`: String (required)
+{
+  "email": "admin@petshop.com",
+  "senha": "admin123"
+}
+```
 
-### 2. Clientes
-- `_id`: ObjectId
-- `nome`: String (required)
-- `email`: String (required, unique)
-- `telefone`: String (optional)
-- `senha`: String (required)
-- `enderecos`: Array of Objects
-  - `_id_endereco`: ObjectId
-  - `logradouro`: String
-  - `numero`: String
-  - `complemento`: String (optional)
-  - `cidade`: String
-  - `estado`: String
-  - `cep`: String
+### 3. Criar Categorias (requer token de admin)
+```http
+POST /api/categorias
+Authorization: Bearer [TOKEN_DO_ADMIN]
+Content-Type: application/json
 
-### 3. Categorias
-- `_id`: ObjectId
-- `nome`: String (required)
+{
+  "nome": "Ração para Cães"
+}
+```
 
-### 4. Produtos
-- `_id`: ObjectId
-- `nome`: String (required)
-- `descricao`: String (optional)
-- `preco`: Decimal128 (required)
-- `estoque`: Int32 (required)
-- `idCategoria`: ObjectId (required, references Categorias)
+### 4. Criar Produtos (requer token de admin)
+```http
+POST /api/produtos
+Authorization: Bearer [TOKEN_DO_ADMIN]
+Content-Type: application/json
 
-### 5. Pedidos
-- `_id`: ObjectId
-- `idCliente`: ObjectId (required, references Clientes)
-- `idEnderecoEntrega`: ObjectId (required, references Cliente.enderecos._id_endereco)
-- `logradouro`: String (required)
-- `numero`: String (required)
-- `complemento`: String (optional)
-- `cidade`: String (required)
-- `estado`: String (required)
-- `cep`: String (required)
-- `dataPedido`: Date (required)
-- `statusPedido`: String (required, enum: 'PENDENTE', 'PROCESSANDO', 'ENVIADO', 'ENTREGUE', 'CANCELADO')
-- `valorTotal`: Decimal128 (required)
-- `itens`: Array of Objects
-  - `idProduto`: ObjectId (references Produtos)
-  - `nomeProduto`: String
-  - `quantidade`: Int32
-  - `precoUnitario`: Decimal128
+{
+  "nome": "Ração Premium para Cães Adultos",
+  "descricao": "Ração completa e balanceada para cães adultos",
+  "preco": 89.90,
+  "estoque": 50,
+  "imagemUrl": "https://exemplo.com/racao.jpg",
+  "categoriaId": 1
+}
+```
 
-## MongoDB Setup
+### 5. Cadastrar Cliente
+```http
+POST /api/clientes
+Content-Type: application/json
 
-### Using MongoDB Compass
-1. Open MongoDB Compass
-2. Connect to `mongodb://localhost:27017`
-3. Open the shell tab at the bottom
-4. Copy and paste the contents of `setup-petshop-db.js`
-5. Execute the script
+{
+  "nome": "João Silva",
+  "email": "joao@email.com",
+  "telefone": "11888888888",
+  "senha": "cliente123"
+}
+```
 
-### Using mongosh CLI
-1. Open command prompt/terminal
-2. Run: `mongosh mongodb://localhost:27017`
-3. Execute: `load("setup-petshop-db.js")`
+### 6. Login do Cliente
+```http
+POST /api/auth/cliente/login
+Content-Type: application/json
 
-### Quick Copy-Paste Option
-1. Open `mongosh-commands.txt`
-2. Copy the commands and paste them into mongosh or Compass shell
+{
+  "email": "joao@email.com",
+  "senha": "cliente123"
+}
+```
 
-### Insert MongoDB Sample Data
-After creating collections, run `sample-data.js` to insert sample data.
+### 7. Adicionar Endereço (requer token de cliente)
+```http
+POST /api/clientes/enderecos
+Authorization: Bearer [TOKEN_DO_CLIENTE]
+Content-Type: application/json
 
-## SQL Server Setup
+{
+  "logradouro": "Rua das Flores, 123",
+  "numero": 123,
+  "bairro": "Centro",
+  "cidade": "São Paulo",
+  "estado": "SP",
+  "cep": "01234567"
+}
+```
 
-### Using SQL Server Management Studio (SSMS)
-1. Open SSMS and connect to your SQL Server instance
-2. Open `create-sqlserver-database.sql` or `create-schema-only.sql`
-3. Execute the script to create database and tables
-4. Optionally run `insert-sample-data.sql` to add sample data
+### 8. Listar Produtos
+```http
+GET /api/produtos
+```
 
-### Using Azure Data Studio
-1. Connect to your SQL Server instance
-2. Open and execute the SQL scripts in order:
-   - `create-schema-only.sql` (creates tables)
-   - `insert-sample-data.sql` (adds sample data)
+### 9. Adicionar Item ao Carrinho (requer token de cliente)
+```http
+POST /api/carrinho/items
+Authorization: Bearer [TOKEN_DO_CLIENTE]
+Content-Type: application/json
 
-## Files Overview
+{
+  "produtoId": 1,
+  "quantidade": 2
+}
+```
 
-### MongoDB Files
-- `setup-petshop-db.js` - Creates MongoDB collections with validation
-- `sample-data.js` - Inserts sample data into MongoDB
-- `mongosh-commands.txt` - Quick reference commands
+### 10. Ver Carrinho (requer token de cliente)
+```http
+GET /api/carrinho
+Authorization: Bearer [TOKEN_DO_CLIENTE]
+```
 
-### SQL Server Files  
-- `create-sqlserver-database.sql` - Complete database with sample data
-- `create-schema-only.sql` - Database schema only (tables, constraints, indexes)
-- `insert-sample-data.sql` - Sample data insertion script
+### 11. Review do Pedido (requer token de cliente)
+```http
+POST /api/pedidos/review
+Authorization: Bearer [TOKEN_DO_CLIENTE]
+Content-Type: application/json
 
-## Indexes Created
+{
+  "enderecoId": 1
+}
+```
 
-The following indexes are automatically created for optimal performance:
-- `administradores.email` (unique)
-- `clientes.email` (unique)
-- `produtos.idCategoria`
-- `pedidos.idCliente`
-- `pedidos.statusPedido`
-- `pedidos.dataPedido` (descending)
+### 12. Confirmar Pedido (requer token de cliente)
+```http
+POST /api/pedidos/confirmar
+Authorization: Bearer [TOKEN_DO_CLIENTE]
+Content-Type: application/json
 
-## Validation
+{
+  "enderecoId": 1
+}
+```
 
-All collections include JSON Schema validation to ensure data integrity:
-- Required fields are enforced
-- Data types are validated
-- Enum values are restricted where applicable
-- Array structures are validated
+### 13. Listar Meus Pedidos (requer token de cliente)
+```http
+GET /api/pedidos
+Authorization: Bearer [TOKEN_DO_CLIENTE]
+```
 
-## Next Steps
+## Estrutura do Banco de Dados
 
-After creating the collections, you can:
-1. Insert sample data using `sample-data.js`
-2. Connect your application using: `mongodb://localhost:27017/petshop`
-3. Build a REST API or web application
+### SQL Server (5CG5123HJ2\SQLEXPRESS)
+- **Categorias**: ID, Nome, Ativo
+- **Produtos**: ID, Nome, Descrição, Preço, Estoque, Ativo, ImagemUrl, CategoriaID
+- **Clientes**: ID, Nome, Email, Telefone, Senha (hash), Ativo
+- **Endereços**: ID, Logradouro, Número, Bairro, Cidade, Estado, CEP, ClienteID
+- **Administradores**: ID, Nome, Email, Telefone, Senha (hash), Ativo
+
+### MongoDB (localhost:27017)
+- **Pedidos**: ID, ClienteID, Nome, EnderecoID, EnderecoEntrega, Total, DataPedido, Status, Items[]
+
+## Características da API
+
+✅ **Arquitetura Vertical Slice** - Cada feature é independente
+✅ **Autenticação JWT** - Separada para clientes e administradores
+✅ **Autorização baseada em roles** - Admin/Cliente
+✅ **Validação com FluentValidation**
+✅ **Senhas com hash BCrypt**
+✅ **Soft delete** - Entidades são desativadas, não deletadas
+✅ **Documentação Swagger** - Interface web para testes
+✅ **CORS habilitado** - Para integração com frontend
+✅ **Carrinho de compras em memória** - Simula sessão de usuário
+✅ **Pagamento simulado** - Aprovação automática
+✅ **Controle de estoque** - Redução automática após pedido
+✅ **Dual database** - SQL Server + MongoDB
+
+## Fluxo Completo de Compra
+
+1. **Cliente se cadastra** (`POST /api/clientes`)
+2. **Cliente faz login** (`POST /api/auth/cliente/login`)
+3. **Cliente adiciona endereço** (`POST /api/clientes/enderecos`)
+4. **Cliente visualiza produtos** (`GET /api/produtos`)
+5. **Cliente adiciona itens ao carrinho** (`POST /api/carrinho/items`)
+6. **Cliente visualiza carrinho** (`GET /api/carrinho`)
+7. **Cliente faz review do pedido** (`POST /api/pedidos/review`)
+8. **Cliente confirma pedido** (`POST /api/pedidos/confirmar`)
+9. **Sistema processa pagamento** (simulado - aprovação automática)
+10. **Sistema reduz estoque e salva pedido no MongoDB**
+11. **Cliente pode visualizar seus pedidos** (`GET /api/pedidos`)
+
+A API está totalmente funcional e pronta para uso!

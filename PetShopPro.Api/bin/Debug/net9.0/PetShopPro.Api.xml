@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PetShopPro.Api</name>
+    </assembly>
+    <members>
+        <member name="M:PetShopPro.Api.Features.Administradores.AdministradoresController.Create(PetShopPro.Api.Features.Administradores.CreateAdministradorRequest)">
+            <summary>
+            Cadastrar novo administrador (primeiro admin não precisa de autenticação, demais precisam)
+            </summary>
+        </member>
+        <member name="M:PetShopPro.Api.Features.Auth.AuthController.LoginCliente(PetShopPro.Api.Shared.DTOs.LoginRequest)">
+            <summary>
+            Login de cliente
+            </summary>
+        </member>
+        <member name="M:PetShopPro.Api.Features.Auth.AuthController.LoginAdministrador(PetShopPro.Api.Shared.DTOs.LoginRequest)">
+            <summary>
+            Login de administrador
+            </summary>
+        </member>
+        <member name="M:PetShopPro.Api.Features.Carrinho.CarrinhoController.Get">
+            <summary>
+            Obter carrinho do cliente logado
+            </summary>
+        </member>
+        <member name="M:PetShopPro.Api.Features.Carrinho.CarrinhoController.AdicionarItem(PetShopPro.Api.Features.Carrinho.AdicionarItemRequest)">
+            <summary>
+            Adicionar item ao carrinho
+            </summary>
+        </member>
+        <member name="M:PetShopPro.Api.Features.Carrinho.CarrinhoController.RemoverItem(System.Int32)">
+            <summary>
+            Remover item do carrinho
+            </summary>
+        </member>
+        <member name="M:PetShopPro.Api.Features.Categorias.CategoriasController.Get">
+            <summary>
+            Listar todas as categorias ativas
+            </summary>
+        </member>
+        <member name="M:PetShopPro.Api.Features.Categorias.CategoriasController.Create(PetShopPro.Api.Features.Categorias.CreateCategoriaRequest)">
+            <summary>
+            Criar nova categoria (apenas administradores)
+            </summary>
+        </member>
+        <member name="M:PetShopPro.Api.Features.Clientes.ClientesController.Create(PetShopPro.Api.Features.Clientes.CreateClienteRequest)">
+            <summary>
+            Cadastrar novo cliente
+            </summary>
+        </member>
+        <member name="M:PetShopPro.Api.Features.Clientes.ClientesController.CreateEndereco(PetShopPro.Api.Features.Clientes.CreateEnderecoRequest)">
+            <summary>
+            Adicionar endereço ao cliente logado
+            </summary>
+        </member>
+        <member name="M:PetShopPro.Api.Features.Clientes.ClientesController.GetMeusEnderecos">
+            <summary>
+            Listar endereços do cliente logado
+            </summary>
+        </member>
+        <member name="M:PetShopPro.Api.Features.Clientes.ClientesController.GetTodosClientes">
+            <summary>
+            Listar todos os clientes (apenas administradores)
+            </summary>
+        </member>
+        <member name="M:PetShopPro.Api.Features.Pedidos.PedidosController.GetMeusPedidos">
+            <summary>
+            Listar pedidos do cliente logado
+            </summary>
+        </member>
+        <member name="M:PetShopPro.Api.Features.Pedidos.PedidosController.ConfirmarPedido(PetShopPro.Api.Features.Pedidos.CreatePedidoRequest)">
+            <summary>
+            Confirmar e criar pedido (pagamento simulado e aprovado automaticamente)
+            </summary>
+        </member>
+        <member name="M:PetShopPro.Api.Features.Produtos.ProdutosController.Get(System.Nullable{System.Int32})">
+            <summary>
+            Listar produtos ativos, opcionalmente filtrados por categoria
+            </summary>
+        </member>
+        <member name="M:PetShopPro.Api.Features.Produtos.ProdutosController.GetById(System.Int32)">
+            <summary>
+            Buscar produto por ID
+            </summary>
+        </member>
+        <member name="M:PetShopPro.Api.Features.Produtos.ProdutosController.Create(PetShopPro.Api.Features.Produtos.CreateProdutoRequest)">
+            <summary>
+            Criar novo produto (apenas administradores)
+            </summary>
+        </member>
+        <member name="T:PetShopPro.Api.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:PetShopPro.Api.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:PetShopPro.Api.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:PetShopPro.Api.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

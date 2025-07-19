@@ -1,0 +1,165 @@
+### PetShop Pro API - Testes HTTP
+### Para usar este arquivo, instale a extensão "REST Client"### 11. Adicionar Endereço (com token de cliente)
+POST {{baseUrl}}/api/clientes/enderecos
+Authorization: Bearer {{clienteToken}}
+Content-Type: application/json
+
+{
+  "logradouro": "Rua das Flores",
+  "numero": 123,
+  "bairro": "Centro",
+  "cidade": "São Paulo",
+  "estado": "SP",
+  "cep": "01234567"
+}
+
+### 12. Adicionar Item ao Carrinho (com token de cliente)@baseUrl = https://localhost:7000
+@adminToken = 
+@clienteToken = 
+
+### 1. Criar Primeiro Administrador (sem autenticação)
+POST {{baseUrl}}/api/administradores
+Content-Type: application/json
+
+{
+  "nome": "Admin Master",
+  "email": "admin@petshop.com",
+  "telefone": "11999999999",
+  "senha": "admin123"
+}
+
+### 2. Login Administrador
+POST {{baseUrl}}/api/auth/administrador/login
+Content-Type: application/json
+
+{
+  "email": "admin@petshop.com",
+  "senha": "admin123"
+}
+
+### 2.1. Criar Administrador Adicional (requer token de admin)
+POST {{baseUrl}}/api/administradores
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "nome": "Admin Secundário",
+  "email": "admin2@petshop.com",
+  "telefone": "11888888888",
+  "senha": "admin456"
+}
+
+### 3. Criar Categoria (com token de admin)
+POST {{baseUrl}}/api/categorias
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "nome": "Ração para Cães"
+}
+
+### 4. Listar Categorias
+GET {{baseUrl}}/api/categorias
+
+### 5. Criar Produto (com token de admin)
+POST {{baseUrl}}/api/produtos
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "nome": "Ração Premium para Cães Adultos",
+  "descricao": "Ração completa e balanceada para cães adultos",
+  "preco": 89.90,
+  "estoque": 50,
+  "imagemUrl": "https://exemplo.com/racao.jpg",
+  "categoriaId": 1
+}
+
+### 6. Listar Produtos
+GET {{baseUrl}}/api/produtos
+
+### 7. Buscar Produto por ID
+GET {{baseUrl}}/api/produtos/1
+
+### 8. Cadastrar Cliente
+POST {{baseUrl}}/api/clientes
+Content-Type: application/json
+
+{
+  "nome": "João Silva",
+  "email": "joao@email.com",
+  "telefone": "11888888888",
+  "senha": "cliente123"
+}
+
+### 9. Listar Todos os Clientes (com token de admin)
+GET {{baseUrl}}/api/clientes
+Authorization: Bearer {{adminToken}}
+
+### 10. Login Cliente
+POST {{baseUrl}}/api/auth/cliente/login
+Content-Type: application/json
+
+{
+  "email": "joao@email.com",
+  "senha": "cliente123"
+}
+
+### 11. Adicionar Endereço (com token de cliente)
+POST {{baseUrl}}/api/clientes/enderecos
+Authorization: Bearer {{clienteToken}}
+Content-Type: application/json
+
+{
+  "logradouro": "Rua das Flores, 123",
+  "numero": 123,
+  "bairro": "Centro",
+  "cidade": "São Paulo",
+  "estado": "SP",
+  "cep": "01234567"
+}
+
+### 11. Listar Endereços do Cliente (com token de cliente)
+GET {{baseUrl}}/api/clientes/enderecos
+Authorization: Bearer {{clienteToken}}
+
+### 12. Adicionar Item ao Carrinho (com token de cliente)
+POST {{baseUrl}}/api/carrinho/items
+Authorization: Bearer {{clienteToken}}
+Content-Type: application/json
+
+{
+  "produtoId": 1,
+  "quantidade": 2
+}
+
+### 13. Ver Carrinho (com token de cliente)
+GET {{baseUrl}}/api/carrinho
+Authorization: Bearer {{clienteToken}}
+
+### 14. Remover Item do Carrinho (com token de cliente)
+DELETE {{baseUrl}}/api/carrinho/items/1
+Authorization: Bearer {{clienteToken}}
+
+### 15. Confirmar Pedido (com token de cliente)
+POST {{baseUrl}}/api/pedidos/confirmar
+Authorization: Bearer {{clienteToken}}
+Content-Type: application/json
+
+{
+  "enderecoId": 1
+}
+
+### 16. Listar Meus Pedidos (com token de cliente)
+GET {{baseUrl}}/api/pedidos
+Authorization: Bearer {{clienteToken}}
+
+### Teste de Health Check
+GET {{baseUrl}}/swagger
+
+###
+### INSTRUÇÕES:
+### 1. Execute a aplicação em modo debug (F5)
+### 2. Copie os tokens retornados nos logins e cole nas variáveis @adminToken e @clienteToken
+### 3. Execute cada requisição clicando em "Send Request" acima de cada bloco
+###

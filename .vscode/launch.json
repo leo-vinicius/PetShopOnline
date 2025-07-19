@@ -2,13 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "🐾 Launch PetShop API (.NET 9)",
+      "name": "Launch PetShop API",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/PetShopAPI/bin/Debug/net9.0/PetShopAPI.dll",
+      "program": "${workspaceFolder}/PetShopPro.Api/bin/Debug/net9.0/PetShopPro.Api.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/PetShopAPI",
+      "cwd": "${workspaceFolder}/PetShopPro.Api",
       "console": "internalConsole",
       "stopAtEntry": false,
       "serverReadyAction": {
@@ -18,156 +18,33 @@
       },
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "https://localhost:7001;http://localhost:5001",
-        "DOTNET_ENVIRONMENT": "Development"
-      },
-      "sourceFileMap": {
-        "/Views": "${workspaceFolder}/Views"
-      },
-      "logging": {
-        "moduleLoad": false
-      },
-      "justMyCode": true,
-      "requireExactSource": true
-    },
-    {
-      "name": "🔧 Launch PetShop API (Production Mode)",
-      "type": "coreclr",
-      "request": "launch",
-      "preLaunchTask": "build",
-      "program": "${workspaceFolder}/PetShopAPI/bin/Debug/net9.0/PetShopAPI.dll",
-      "args": [],
-      "cwd": "${workspaceFolder}/PetShopAPI",
-      "console": "internalConsole",
-      "stopAtEntry": false,
-      "serverReadyAction": {
-        "action": "openExternally",
-        "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
-        "uriFormat": "%s/swagger"
-      },
-      "env": {
-        "ASPNETCORE_ENVIRONMENT": "Production",
-        "ASPNETCORE_URLS": "https://localhost:7001;http://localhost:5001",
-        "DOTNET_ENVIRONMENT": "Production"
-      },
-      "sourceFileMap": {
-        "/Views": "${workspaceFolder}/Views"
-      },
-      "logging": {
-        "moduleLoad": false
-      },
-      "justMyCode": true,
-      "requireExactSource": true
-    },
-    {
-      "name": "🐛 Attach to PetShop API Process",
-      "type": "coreclr",
-      "request": "attach",
-      "processId": "${command:pickProcess}",
-      "justMyCode": true,
-      "requireExactSource": true
-    },
-    {
-      "name": "🚀 Launch API + Open Swagger UI",
-      "type": "coreclr",
-      "request": "launch",
-      "preLaunchTask": "build",
-      "program": "${workspaceFolder}/PetShopAPI/bin/Debug/net9.0/PetShopAPI.dll",
-      "args": [],
-      "cwd": "${workspaceFolder}/PetShopAPI",
-      "console": "internalConsole",
-      "stopAtEntry": false,
-      "serverReadyAction": {
-        "action": "openExternally",
-        "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
-        "uriFormat": "%s/swagger"
-      },
-      "postDebugTask": "open-swagger-ui",
-      "env": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "https://localhost:7001;http://localhost:5001",
-        "DOTNET_ENVIRONMENT": "Development",
-        "ASPNETCORE_DETAILEDERRORS": "true",
-        "Logging__LogLevel__Default": "Information",
-        "Logging__LogLevel__Microsoft.AspNetCore": "Warning"
-      },
-      "sourceFileMap": {
-        "/Views": "${workspaceFolder}/Views"
-      },
-      "logging": {
-        "moduleLoad": false,
-        "diagnosticsLog": {
-          "protocolMessages": false
-        },
-        "trace": false,
-        "traceResponse": false,
-        "programOutput": true,
-        "elapsedTiming": false
-      },
-      "justMyCode": true,
-      "requireExactSource": true,
-      "suppressJITOptimizations": true,
-      "enableStepFiltering": true
-    },
-    {
-      "name": "🔍 Debug with MongoDB + SQL Server Logs",
-      "type": "coreclr",
-      "request": "launch",
-      "preLaunchTask": "build",
-      "program": "${workspaceFolder}/PetShopAPI/bin/Debug/net9.0/PetShopAPI.dll",
-      "args": [],
-      "cwd": "${workspaceFolder}/PetShopAPI",
-      "console": "internalConsole",
-      "stopAtEntry": false,
-      "serverReadyAction": {
-        "action": "openExternally",
-        "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
-        "uriFormat": "%s/swagger"
-      },
-      "env": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "https://localhost:7001;http://localhost:5001",
-        "DOTNET_ENVIRONMENT": "Development",
-        "ASPNETCORE_DETAILEDERRORS": "true",
-        "Logging__LogLevel__Default": "Debug",
-        "Logging__LogLevel__Microsoft.AspNetCore": "Information",
-        "Logging__LogLevel__Microsoft.EntityFrameworkCore": "Information",
-        "Logging__LogLevel__MongoDB": "Debug",
-        "ConnectionStrings__SqlServerConnection": "Server=5CG5123HJ2\\SQLEXPRESS;Database=PetShop;Trusted_Connection=true;TrustServerCertificate=true;",
-        "ConnectionStrings__MongoDbConnection": "mongodb://localhost:27017",
-        "ConnectionStrings__MongoDbDatabase": "petshop"
-      },
-      "sourceFileMap": {
-        "/Views": "${workspaceFolder}/Views"
-      },
-      "logging": {
-        "moduleLoad": false,
-        "diagnosticsLog": {
-          "protocolMessages": true
-        },
-        "trace": true,
-        "traceResponse": true,
-        "programOutput": true,
-        "elapsedTiming": true
-      },
-      "justMyCode": false,
-      "requireExactSource": false,
-      "suppressJITOptimizations": false,
-      "enableStepFiltering": false
-    }
-  ],
-  "compounds": [
-    {
-      "name": "🎯 Full Debug Suite",
-      "configurations": [
-        "🚀 Launch API + Open Swagger UI"
-      ],
-      "stopAll": true,
-      "presentation": {
-        "hidden": false,
-        "group": "PetShop Debug",
-        "order": 1
+        "ASPNETCORE_URLS": "https://localhost:7000;http://localhost:5000"
       }
+    },
+    {
+      "name": "Launch PetShop API (HTTPS Only)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/PetShopPro.Api/bin/Debug/net9.0/PetShopPro.Api.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/PetShopPro.Api",
+      "console": "internalConsole",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https://\\S+)",
+        "uriFormat": "%s/swagger"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "https://localhost:7000"
+      }
+    },
+    {
+      "name": "Attach to PetShop API",
+      "type": "coreclr",
+      "request": "attach"
     }
   ]
 }
