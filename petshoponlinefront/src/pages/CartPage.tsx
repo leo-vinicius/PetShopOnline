@@ -1,11 +1,10 @@
-import { useCart } from '../hooks/useCart';
 import HomeMenu from '../components/menu/Menu';
+import { useCart } from '../hooks/useCart';
 
 export default function CartPage() {
-    const { cartItems, removeFromCart } = useCart();
+    const { state, removeItem } = useCart();
 
-    const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
+    const totalPrice = state.items.reduce((acc: number, item: { price: number; quantity: number }) => acc + item.price * item.quantity, 0);
     return (
         <div style={{ fontFamily: 'Segoe UI, Arial, sans-serif', background: '#f7f7f7', minHeight: '100vh' }}>
             <header style={{
@@ -23,11 +22,11 @@ export default function CartPage() {
             <main style={{ padding: '2rem', maxWidth: '1080px', margin: '0 auto' }}>
                 <h1 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2rem' }}>🛒 Carrinho de Compras</h1>
 
-                {cartItems.length === 0 ? (
+                {state.items.length === 0 ? (
                     <p style={{ fontSize: '1.2rem' }}>Seu carrinho está vazio.</p>
                 ) : (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                        {cartItems.map(item => (
+                        {state.items.map((item: { id: string; name: string; price: number; quantity: number; imageUrl?: string }) => (
                             <div key={item.id} style={{
                                 background: '#fff',
                                 borderRadius: '12px',
@@ -44,7 +43,7 @@ export default function CartPage() {
                                     <p style={{ margin: 0, color: '#000', fontWeight: 600 }}>Total: R$ {(item.price * item.quantity).toFixed(2)}</p>
                                 </div>
                                 <button
-                                    onClick={() => removeFromCart(item.id)}
+                                    onClick={() => removeItem(item.id)}
                                     style={{
                                         background: '#e53935',
                                         color: '#fff',

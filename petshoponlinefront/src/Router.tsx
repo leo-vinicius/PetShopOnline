@@ -1,7 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AdminPage from './pages/AdminPage';
+import CartPage from './pages/CartPage';
 import Home from './pages/Home';
 import LoginPage from './pages/LoginPage';
+import ProductDetailPage from './pages/ProductDetailsPage';
+import ProductsPage from './pages/ProductsPage';
 import ProfilePage from './pages/ProfilePage';
 import CadastroPage from './pages/RegisterPage';
 
@@ -15,7 +18,8 @@ export default function Router() {
                 <Route path="/perfil" element={<ProfilePage />} />
                 <Route path="/admin" element={<AdminPage />} />
                 <Route path="/carrinho" element={<CartPage />} />
-                <Route path="/produtos" element={<ProductPage />} />
+                <Route path="/produtos" element={<ProductsPage />} />
+                <Route path="/produtos/:id" element={<ProductDetailPage />} />
             </Routes>
         </BrowserRouter>
     );

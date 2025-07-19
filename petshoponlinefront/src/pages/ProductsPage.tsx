@@ -1,4 +1,4 @@
-import { useCart } from '../hooks/useCart';
+import { useNavigate } from 'react-router-dom';
 import HomeMenu from '../components/menu/Menu';
 
 type Product = {
@@ -30,15 +30,10 @@ const mockProducts: Product[] = [
 ];
 
 export default function ProductsPage() {
-    const { addToCart } = useCart();
+    const navigate = useNavigate();
 
-    const handleAdd = (product: Product) => {
-        addToCart({
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            quantity: 1,
-        });
+    const handleProductClick = (id: number) => {
+        navigate(`/produtos/${id}`);
     };
 
     return (
@@ -59,36 +54,38 @@ export default function ProductsPage() {
                 <h1 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '1.5rem' }}>Produtos</h1>
                 <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
                     {mockProducts.map(product => (
-                        <div key={product.id} style={{
-                            background: '#fff',
-                            borderRadius: '16px',
-                            padding: '1rem',
-                            width: '280px',
-                            boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center'
-                        }}>
+                        <div
+                            key={product.id}
+                            style={{
+                                background: '#fff',
+                                borderRadius: '16px',
+                                padding: '1rem',
+                                width: '280px',
+                                boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                cursor: 'pointer',
+                                transition: 'box-shadow 0.2s'
+                            }}
+                            onClick={() => handleProductClick(product.id)}
+                            onMouseOver={e => (e.currentTarget.style.boxShadow = '0 8px 24px rgba(33,150,243,0.15)')}
+                            onMouseOut={e => (e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)')}
+                        >
                             <img src={product.imageUrl} alt={product.name} style={{ borderRadius: '8px', width: '100%', marginBottom: '1rem' }} />
                             <h2 style={{ fontSize: '1.2rem', fontWeight: 600, marginBottom: '0.5rem' }}>{product.name}</h2>
                             <p style={{ fontWeight: 500, color: '#333', marginBottom: '1rem' }}>R$ {product.price.toFixed(2)}</p>
-                            <button
-                                onClick={() => handleAdd(product)}
-                                style={{
-                                    background: '#2196f3',
-                                    color: '#fff',
-                                    border: 'none',
-                                    borderRadius: '8px',
-                                    padding: '0.6rem 1.5rem',
-                                    fontWeight: 600,
-                                    cursor: 'pointer',
-                                    transition: 'background 0.2s'
-                                }}
-                                onMouseOver={e => e.currentTarget.style.background = '#1976d2'}
-                                onMouseOut={e => e.currentTarget.style.background = '#2196f3'}
-                            >
-                                Adicionar ao Carrinho
-                            </button>
+                            <span style={{
+                                background: '#2196f3',
+                                color: '#fff',
+                                borderRadius: '8px',
+                                padding: '0.4rem 1rem',
+                                fontWeight: 500,
+                                fontSize: '0.95rem',
+                                marginTop: '0.5rem'
+                            }}>
+                                Ver detalhes
+                            </span>
                         </div>
                     ))}
                 </div>
