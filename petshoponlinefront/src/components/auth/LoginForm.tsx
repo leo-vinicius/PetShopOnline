@@ -24,6 +24,7 @@ export default function LoginForm() {
         try {
             const result = await authService.login({ email, senha });
             if (result.token) {
+                localStorage.setItem('auth', JSON.stringify(result));
                 login(result.token, result.userType, result.userId);
                 navigate('/');
             }
