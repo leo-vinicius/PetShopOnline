@@ -19,12 +19,13 @@ async function login({ email, senha }: { email: string, senha: string }) {
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || 'Erro no login');
+    console.log('Login realizado com sucesso:', data);
     return {
-        token: data.token,
-        userType: data.tipoUsuario || data.userType,
-        userId: data.userId,
-        nome: data.nome,
-        email: data.email
+        token: data.data.token,
+        userType: data.data.tipoUsuario || data.data.userType,
+        userId: data.data.userId,
+        nome: data.data.nome,
+        email: data.data.email
     };
 }
 
