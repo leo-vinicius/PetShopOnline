@@ -9,7 +9,14 @@ export default function ProductDetailPage() {
     const produto = location.state?.produto;
     const [msg, setMsg] = useState('');
 
+    const auth = JSON.parse(localStorage.getItem('auth') || '{}');
+    const isLoggedIn = !!auth.token;
+
     const handleAddToCart = async () => {
+        if (!isLoggedIn) {
+            setMsg('Você precisa estar logado para adicionar ao carrinho.');
+            return;
+        }
         try {
             await cartService.adicionarItem(produto.id, 1);
             setMsg('Produto adicionado ao carrinho!');

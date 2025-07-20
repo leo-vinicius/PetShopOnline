@@ -14,13 +14,18 @@ const rightMenu = [
 export default function HomeMenu({ horizontal = true }: { horizontal?: boolean }) {
     const { auth } = useAuth();
 
-    const rightMenu = [
-        { label: 'Carrinho', path: '/carrinho', icon: '' },
-        { label: 'Meus Pedidos', path: '/pedidos', icon: '' },
-        auth
-            ? { label: 'Meu perfil', path: '/perfil', icon: '' }
-            : { label: 'Fazer login', path: '/login', icon: '' }
-    ];
+    const rightMenu = auth
+        ? [
+            { label: 'Carrinho', path: '/carrinho', icon: '' },
+            { label: 'Meus Pedidos', path: '/pedidos', icon: '' },
+            { label: 'Meu perfil', path: '/perfil', icon: '' },
+            ...(auth.userType === 'Administrador'
+                ? [{ label: 'Admin', path: '/admin', icon: '' }]
+                : [])
+        ]
+        : [
+            { label: 'Fazer login', path: '/login', icon: '' }
+        ];
 
     return (
         <nav style={{

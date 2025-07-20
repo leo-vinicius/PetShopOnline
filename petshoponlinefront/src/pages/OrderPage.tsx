@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import HomeMenu from "../components/menu/Menu";
+import addressService from "../services/AddressService";
 import cartService from "../services/CartService";
 import orderService from "../services/OrderService";
 
@@ -10,6 +12,7 @@ export default function CheckoutPage() {
     const [loading, setLoading] = useState(true);
     const [msg, setMsg] = useState('');
     const [pagando, setPagando] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         carregarCarrinho();
@@ -28,17 +31,8 @@ export default function CheckoutPage() {
 
     async function carregarEnderecos() {
         try {
-            const auth = JSON.parse(localStorage.getItem('auth') || '{}');
-            const token = auth.token;
-            const res = await fetch('https://localhost:7000/api/clientes/enderecos', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            if (res.ok) {
-                const data = await res.json();
-                setEnderecos(data.data ?? data);
-            }
+            const res = await addressService.listarEnderecos();
+            setEnderecos(res.data ?? res);
         } catch {
             setMsg('Erro ao carregar endereços');
         }
@@ -51,14 +45,23 @@ export default function CheckoutPage() {
             setMsg('Selecione um endereço de entrega.');
             return;
         }
+        const auth = JSON.parse(localStorage.getItem('auth') || '{}');
+        const clienteId = auth.userId;
+        if (!clienteId) {
+            setMsg('Usuário não autenticado.');
+            return;
+        }
+        const itens = (carrinho.items ?? carrinho.Itens).map((item: any) => ({
+            produtoId: item.produtoId ?? item.ProdutoId,
+            quantidade: item.quantidade ?? item.Quantidade
+        }));
+
         setPagando(true);
         setMsg('Processando pagamento...');
-        // Simula pagamento
         setTimeout(async () => {
             try {
-                await orderService.confirmarPedido(enderecoId);
-                setMsg('Pedido realizado com sucesso! 🎉');
-                setCarrinho(null);
+                await orderService.confirmarPedido(clienteId, enderecoId);
+                navigate('/order/success');
             } catch {
                 setMsg('Erro ao finalizar pedido');
             }
@@ -108,16 +111,39 @@ export default function CheckoutPage() {
                                 <select
                                     style={{ marginLeft: 12, padding: 6, borderRadius: 6, border: '1px solid #e3eafc' }}
                                     value={enderecoId ?? ''}
-                                    onChange={e => setEnderecoId(Number(e.target.value))}
+                                    onChange={e => {
+                                        const val = e.target.value;
+                                        setEnderecoId(val ? Number(val) : null);
+                                    }}
                                     disabled={pagando}
                                 >
                                     <option value="">Selecione...</option>
                                     {enderecos.map((e: any) => (
-                                        <option key={e.idEndereco ?? e._id_endereco} value={e.idEndereco ?? e._id_endereco}>
-                                            {e.logradouro}, {e.numero} - {e.cidade}/{e.estado}
+                                        <option
+                                            key={e.id}
+                                            value={e.id}
+                                        >
+                                            {(e.logradouro ?? e.Logradouro)}, {(e.numero ?? e.Numero)} - {(e.cidade ?? e.Cidade)}/{(e.estado ?? e.Estado)}
                                         </option>
                                     ))}
                                 </select>
+                                <button
+                                    type="button"
+                                    style={{
+                                        marginLeft: 18,
+                                        background: '#e3eafc',
+                                        color: '#2196f3',
+                                        border: 'none',
+                                        borderRadius: 8,
+                                        padding: '0.4rem 1rem',
+                                        fontWeight: 600,
+                                        cursor: 'pointer'
+                                    }}
+                                    onClick={() => navigate('/add-address')}
+                                    disabled={pagando}
+                                >
+                                    + Novo Endereço
+                                </button>
                             </div>
                             <div style={{ marginBottom: 18 }}>
                                 <div style={{ fontWeight: 600, color: '#444', marginBottom: 6 }}>Resumo do Carrinho:</div>

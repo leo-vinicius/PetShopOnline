@@ -1,4 +1,4 @@
-const API_URL = 'https://localhost:7000/api/pedidos';
+const API_URL = 'https://localhost:7000/api/carrinho';
 
 function getAuthHeaders() {
     const auth = JSON.parse(localStorage.getItem('auth') || '{}');
@@ -10,11 +10,11 @@ function getAuthHeaders() {
     return headers;
 }
 
-async function confirmarPedido(enderecoId: number) {
-    const res = await fetch(`${API_URL}/confirmar`, {
+async function confirmarPedido(clienteId: number, enderecoEntregaId: number) {
+    const res = await fetch(`https://localhost:7000/api/carrinho/${clienteId}/finalizar`, {
         method: 'POST',
         headers: getAuthHeaders(),
-        body: JSON.stringify({ enderecoId })
+        body: JSON.stringify(enderecoEntregaId)
     });
     if (!res.ok) throw new Error('Erro ao confirmar pedido');
     return await res.json();

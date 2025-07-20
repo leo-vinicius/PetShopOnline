@@ -8,6 +8,8 @@ import ProductDetailPage from './pages/ProductDetailsPage';
 import ProductsPage from './pages/ProductsPage';
 import ProfilePage from './pages/ProfilePage';
 import CadastroPage from './pages/RegisterPage';
+import AddAddressPage from './pages/NewAddressPage';
+import OrderSuccessPage from './pages/OrderSuccessPage';
 
 
 export default function Router() {
@@ -24,6 +26,8 @@ export default function Router() {
                 <Route path="/produtos" element={<ProductsPage />} />
                 <Route path="/produtos/:id" element={<ProductDetailPage />} />
                 <Route path="/order" element={<OrderPage />} />
+                <Route path="/add-address" element={<AddAddressPage />} />
+                <Route path="/order/success" element={<OrderSuccessPage />} />
             </Routes>
         </BrowserRouter>
     );

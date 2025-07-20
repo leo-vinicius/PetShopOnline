@@ -29,6 +29,24 @@ async function login({ email, senha }: { email: string, senha: string }) {
     };
 }
 
+async function loginAdmin({ email, senha }: { email: string, senha: string }) {
+    const res = await fetch(`https://localhost:7000/api/Auth/administrador/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, senha }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Erro no login');
+    console.log('Login realizado com sucesso:', data);
+    return {
+        token: data.data.token,
+        userType: data.data.tipoUsuario || data.data.userType,
+        userId: data.data.userId,
+        nome: data.data.nome,
+        email: data.data.email
+    };
+}
+
 async function logout(token?: string) {
     await fetch(`${API_URL}/logout`, {
         method: 'POST',
@@ -39,4 +57,4 @@ async function logout(token?: string) {
     });
 }
 
-export default { cadastro, login, logout };
+export default { cadastro, login, loginAdmin, logout };

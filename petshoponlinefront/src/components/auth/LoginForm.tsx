@@ -7,6 +7,7 @@ export default function LoginForm() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [error, setError] = useState('');
+    const [adminMode, setAdminMode] = useState(false);
     const { login } = useAuth();
     const navigate = useNavigate();
 
@@ -22,11 +23,16 @@ export default function LoginForm() {
             return;
         }
         try {
-            const result = await authService.login({ email, senha });
+            let result;
+            if (adminMode) {
+                result = await authService.loginAdmin({ email, senha });
+            } else {
+                result = await authService.login({ email, senha });
+            }
             if (result.token) {
                 localStorage.setItem('auth', JSON.stringify(result));
-                login(result.token, result.userType, result.userId); // se usar contexto
-                navigate('/'); // redireciona para home
+                login(result.token, result.userType, result.userId);
+                navigate('/');
             }
         } catch (err: any) {
             setError(err.message || 'Email ou senha incorretos');
@@ -75,7 +81,9 @@ export default function LoginForm() {
             <button
                 type="submit"
                 style={{
-                    background: 'linear-gradient(90deg, #2196f3 60%, #4ecdc4 100%)',
+                    background: adminMode
+                        ? 'linear-gradient(90deg, #d32f2f 60%, #ff9800 100%)'
+                        : 'linear-gradient(90deg, #2196f3 60%, #4ecdc4 100%)',
                     color: '#fff',
                     border: 'none',
                     borderRadius: '4px',
@@ -84,7 +92,7 @@ export default function LoginForm() {
                     cursor: 'pointer'
                 }}
             >
-                Entrar
+                {adminMode ? 'Entrar como Administrador' : 'Entrar'}
             </button>
             {error && (
                 <div style={{ color: '#d32f2f', marginTop: '-0.5rem', fontSize: '0.95rem' }}>
@@ -92,18 +100,48 @@ export default function LoginForm() {
                 </div>
             )}
             <div style={{ marginTop: '0.5rem', textAlign: 'center', fontSize: '1rem' }}>
-                Ainda não tem cadastro?{' '}
-                <span
-                    style={{
-                        color: '#2196f3',
-                        cursor: 'pointer',
-                        textDecoration: 'underline',
-                        fontWeight: 500
-                    }}
-                    onClick={() => navigate('/cadastro')}
-                >
-                    Clique aqui para se registrar
-                </span>
+                {!adminMode ? (
+                    <>
+                        Ainda não tem cadastro?{' '}
+                        <span
+                            style={{
+                                color: '#2196f3',
+                                cursor: 'pointer',
+                                textDecoration: 'underline',
+                                fontWeight: 500
+                            }}
+                            onClick={() => navigate('/cadastro')}
+                        >
+                            Clique aqui para se registrar
+                        </span>
+                        <br />
+                        <span
+                            style={{
+                                color: '#d32f2f',
+                                cursor: 'pointer',
+                                textDecoration: 'underline',
+                                fontWeight: 500,
+                                marginTop: '0.5rem',
+                                display: 'inline-block'
+                            }}
+                            onClick={() => setAdminMode(true)}
+                        >
+                            Login de administrador
+                        </span>
+                    </>
+                ) : (
+                    <span
+                        style={{
+                            color: '#2196f3',
+                            cursor: 'pointer',
+                            textDecoration: 'underline',
+                            fontWeight: 500
+                        }}
+                        onClick={() => setAdminMode(false)}
+                    >
+                        Voltar ao login de cliente
+                    </span>
+                )}
             </div>
         </form>
     );
