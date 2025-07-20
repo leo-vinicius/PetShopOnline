@@ -1,10 +1,22 @@
+import { useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import HomeMenu from "../components/menu/Menu";
+import cartService from "../services/CartService";
 
 export default function ProductDetailPage() {
     const { id } = useParams<{ id: string }>();
     const location = useLocation();
     const produto = location.state?.produto;
+    const [msg, setMsg] = useState('');
+
+    const handleAddToCart = async () => {
+        try {
+            await cartService.adicionarItem(produto.id, 1);
+            setMsg('Produto adicionado ao carrinho!');
+        } catch {
+            setMsg('Erro ao adicionar ao carrinho');
+        }
+    };
 
     if (!produto) return (
         <div style={{
@@ -139,6 +151,7 @@ export default function ProductDetailPage() {
                             <b>Categoria:</b> {produto.categoriaNome}
                         </div>
                         <button
+                            onClick={handleAddToCart}
                             style={{
                                 background: 'linear-gradient(90deg, #2196f3 60%, #4ecdc4 100%)',
                                 color: '#fff',
@@ -163,6 +176,7 @@ export default function ProductDetailPage() {
                         >
                             Adicionar ao Carrinho
                         </button>
+                        {msg && <div style={{ color: '#267d4a', marginTop: 8 }}>{msg}</div>}
                     </div>
                 </div>
             </div>

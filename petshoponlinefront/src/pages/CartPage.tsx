@@ -1,14 +1,51 @@
-import HomeMenu from '../components/menu/Menu';
-import { useCart } from '../hooks/useCart';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import HomeMenu from "../components/menu/Menu";
+import cartService from "../services/CartService";
 
 export default function CartPage() {
-    const { state, removeItem } = useCart();
+    const [carrinho, setCarrinho] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
+    const [msg, setMsg] = useState('');
+    const navigate = useNavigate();
 
-    const totalPrice = state.items.reduce((acc: number, item: { price: number; quantity: number }) => acc + item.price * item.quantity, 0);
+    useEffect(() => {
+        carregarCarrinho();
+        // eslint-disable-next-line
+    }, []);
+
+    async function carregarCarrinho() {
+        setLoading(true);
+        setError('');
+        try {
+            const res = await cartService.getCarrinho();
+            // O backend pode retornar { data: { ...carrinho } }
+            setCarrinho(res.data ?? res);
+        } catch {
+            setError('Erro ao carregar carrinho');
+        }
+        setLoading(false);
+    }
+
+    async function handleRemover(produtoId: number) {
+        setMsg('');
+        try {
+            await cartService.removerItem(produtoId);
+            setMsg('Item removido do carrinho!');
+            await carregarCarrinho();
+        } catch {
+            setMsg('Erro ao remover item');
+        }
+    }
+
+    if (loading) return <div style={{ padding: 40 }}>Carregando...</div>;
+    if (error) return <div style={{ color: '#d32f2f', padding: 40 }}>{error}</div>;
+
     return (
-        <div style={{ fontFamily: 'Segoe UI, Arial, sans-serif', background: '#f7f7f7', minHeight: '100vh' }}>
+        <>
             <header style={{
-                width: '100%',
+                width: '100vw',
                 background: '#00a2ffff',
                 boxShadow: '0 2px 8px rgba(46,139,87,0.12)',
                 padding: '0.5rem 0',
@@ -18,64 +55,78 @@ export default function CartPage() {
             }}>
                 <HomeMenu horizontal />
             </header>
-
-            <main style={{ padding: '2rem', maxWidth: '1080px', margin: '0 auto' }}>
-                <h1 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2rem' }}>🛒 Carrinho de Compras</h1>
-
-                {state.items.length === 0 ? (
-                    <p style={{ fontSize: '1.2rem' }}>Seu carrinho está vazio.</p>
-                ) : (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                        {state.items.map((item: { id: string; name: string; price: number; quantity: number; imageUrl?: string }) => (
-                            <div key={item.id} style={{
-                                background: '#fff',
-                                borderRadius: '12px',
-                                padding: '1rem 1.5rem',
-                                boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center'
-                            }}>
-                                <div>
-                                    <h2 style={{ fontSize: '1.2rem', fontWeight: 600 }}>{item.name}</h2>
-                                    <p style={{ margin: '0.3rem 0' }}>Quantidade: {item.quantity}</p>
-                                    <p style={{ margin: 0, color: '#555' }}>Preço unitário: R$ {item.price.toFixed(2)}</p>
-                                    <p style={{ margin: 0, color: '#000', fontWeight: 600 }}>Total: R$ {(item.price * item.quantity).toFixed(2)}</p>
+            <div style={{
+                minHeight: '100vh',
+                background: '#f7f7f7',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontFamily: 'Segoe UI, Arial, sans-serif'
+            }}>
+                <div style={{
+                    background: '#fff',
+                    borderRadius: '20px',
+                    boxShadow: '0 8px 32px rgba(33,150,243,0.13)',
+                    padding: '2.5rem 3.5rem',
+                    maxWidth: 700,
+                    width: '100%'
+                }}>
+                    <h2 style={{ color: '#2196f3', fontWeight: 800, fontSize: '2rem', marginBottom: '1.5rem' }}>🛒 Carrinho</h2>
+                    {msg && <div style={{ color: '#267d4a', marginBottom: 12 }}>{msg}</div>}
+                    {!carrinho?.items?.length && !carrinho?.Itens?.length ? (
+                        <div style={{ color: '#888', fontSize: '1.2rem' }}>Seu carrinho está vazio.</div>
+                    ) : (
+                        <>
+                            {(carrinho.items ?? carrinho.Itens).map((item: any) => (
+                                <div key={item.produtoId ?? item.ProdutoId} style={{
+                                    display: 'flex', alignItems: 'center', gap: 18, marginBottom: 18, borderBottom: '1px solid #e3eafc', paddingBottom: 12
+                                }}>
+                                    <img src={item.imagemUrl ?? item.ImagemUrl} alt={item.produtoNome ?? item.ProdutoNome} style={{ width: 70, height: 70, borderRadius: 8, objectFit: 'cover', background: '#f1f1f1' }} />
+                                    <div style={{ flex: 1 }}>
+                                        <div style={{ fontWeight: 700, color: '#2196f3', fontSize: '1.1rem' }}>{item.produtoNome ?? item.ProdutoNome}</div>
+                                        <div style={{ color: '#444', fontSize: '1rem' }}>Qtd: {item.quantidade ?? item.Quantidade}</div>
+                                        <div style={{ color: '#888', fontSize: '0.95rem' }}>Subtotal: R$ {(item.subtotal ?? item.Subtotal ?? ((item.precoUnitario ?? item.PrecoUnitario) * (item.quantidade ?? item.Quantidade))).toFixed(2)}</div>
+                                    </div>
+                                    <button
+                                        style={{
+                                            background: '#fdeaea',
+                                            color: '#d32f2f',
+                                            border: 'none',
+                                            borderRadius: 8,
+                                            padding: '0.4rem 1rem',
+                                            fontWeight: 600,
+                                            cursor: 'pointer'
+                                        }}
+                                        onClick={() => handleRemover(item.produtoId ?? item.ProdutoId)}
+                                    >
+                                        Remover
+                                    </button>
                                 </div>
+                            ))}
+                            <div style={{ textAlign: 'right', marginTop: 24, fontWeight: 700, fontSize: '1.2rem', color: '#267d4a' }}>
+                                Total: R$ {(carrinho.total ?? carrinho.ValorTotal ?? carrinho.valorTotal ?? 0).toFixed(2)}
+                            </div>
+                            <div style={{ textAlign: 'right', marginTop: 24 }}>
                                 <button
-                                    onClick={() => removeItem(item.id)}
                                     style={{
-                                        background: '#e53935',
+                                        background: '#2196f3',
                                         color: '#fff',
                                         border: 'none',
-                                        borderRadius: '8px',
-                                        padding: '0.6rem 1.2rem',
-                                        fontWeight: 600,
-                                        cursor: 'pointer',
-                                        transition: 'background 0.2s'
+                                        borderRadius: 8,
+                                        padding: '0.7rem 2.2rem',
+                                        fontWeight: 700,
+                                        fontSize: '1.1rem',
+                                        cursor: 'pointer'
                                     }}
-                                    onMouseOver={e => e.currentTarget.style.background = '#c62828'}
-                                    onMouseOut={e => e.currentTarget.style.background = '#e53935'}
+                                    onClick={() => navigate('/order')}
                                 >
-                                    Remover
+                                    Finalizar Pedido
                                 </button>
                             </div>
-                        ))}
-
-                        <div style={{
-                            background: '#fff',
-                            borderRadius: '12px',
-                            padding: '1.5rem',
-                            boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-                            fontSize: '1.3rem',
-                            fontWeight: 700,
-                            textAlign: 'right'
-                        }}>
-                            Subtotal: R$ {totalPrice.toFixed(2)}
-                        </div>
-                    </div>
-                )}
-            </main>
-        </div>
+                        </>
+                    )}
+                </div>
+            </div>
+        </>
     );
 }
