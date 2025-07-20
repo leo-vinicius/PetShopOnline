@@ -56,30 +56,30 @@ export default function AdminPage() {
                     </thead>
                     <tbody>
                         {produtos.map(produto => (
-                            <tr key={produto.idProduto}>
+                            <tr key={produto.id}>
                                 <td>{produto.nome}</td>
                                 <td>
-                                    {editId === produto.idProduto ? (
+                                    {editId === produto.id ? (
                                         <>
                                             <input
                                                 type="number"
-                                                value={novoEstoque[produto.idProduto] ?? produto.estoque}
-                                                onChange={e => setNovoEstoque({ ...novoEstoque, [produto.idProduto]: Number(e.target.value) })}
+                                                value={novoEstoque[produto.id] ?? produto.estoque}
+                                                onChange={e => setNovoEstoque({ ...novoEstoque, [produto.id]: Number(e.target.value) })}
                                                 style={{ width: 60 }}
                                             />
-                                            <button onClick={() => handleEstoque(produto.idProduto)}>Salvar</button>
+                                            <button onClick={() => handleEstoque(produto.id)}>Salvar</button>
                                             <button onClick={() => setEditId(null)}>Cancelar</button>
                                         </>
                                     ) : (
                                         <>
                                             {produto.estoque}
-                                            <button style={{ marginLeft: 8 }} onClick={() => setEditId(produto.idProduto)}>Editar</button>
+                                            <button style={{ marginLeft: 8 }} onClick={() => setEditId(produto.id)}>Editar</button>
                                         </>
                                     )}
                                 </td>
                                 <td>R$ {produto.preco.toFixed(2)}</td>
                                 <td>
-                                    <button style={{ color: '#d32f2f' }} onClick={() => handleRemover(produto.idProduto)}>Remover</button>
+                                    <button style={{ color: '#d32f2f' }} onClick={() => handleRemover(produto.id)}>Remover</button>
                                     {/* Adicionar/Editar produto pode ser implementado aqui */}
                                 </td>
                             </tr>
